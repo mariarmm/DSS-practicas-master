@@ -1,13 +1,16 @@
 package com.practica1.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
 import com.practica1.model.Product;
 
 @Service
+@SessionScope
 public class CartService {
 
 //	Almacenar una lista de objetos Product y añadir, eliminar y recuperar artículos.
