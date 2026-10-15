@@ -24,6 +24,7 @@ public class Practica1Application {
 	CommandLineRunner init(ProductRepo productRepo) {
 		return args -> {
 			productRepo.save(new Product ("Tablet", 199.99));
+			productRepo.save(new Product ("Televisión", 250));
 	        log.info("Productos de ejemplo cargados: {}", productRepo.count());
 		};
 	}

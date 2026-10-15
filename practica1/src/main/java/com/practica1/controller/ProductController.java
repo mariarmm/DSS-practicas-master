@@ -43,7 +43,7 @@ public class ProductController {
 	@RequestMapping(value = "/products/save")
 	public String save(Product product) {
 		productService.saveProduct(product);
-		return "redirect:/products/add";
+		return "redirect:/admin";
 	}
 	
 	
