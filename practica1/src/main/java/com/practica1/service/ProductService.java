@@ -2,6 +2,7 @@ package com.practica1.service;
 
 import java.util.List;
 
+
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
@@ -42,5 +43,13 @@ public class ProductService {
 		productRepo.deleteById(id);
 	}
 	
+	public List<Product> search(String q, Double min, Double max){
+		
+		return productRepo.findAll().stream()
+				.filter(p -> q == null || q.isBlank() || (p.getName() != null && p.getName().toLowerCase().contains(q.toLowerCase())))
+				.filter(p -> min == null || p.getPrice() >= min)
+				.filter(p -> max == null || p.getPrice() <= max)
+				.toList();
+	}
 	
 }

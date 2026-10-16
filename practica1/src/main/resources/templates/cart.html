@@ -10,7 +10,16 @@
             <a class="navbar-brand" href="/">
                 <img src="https://img.icons8.com/ios-filled/50/000000/home.png" alt="Inicio" width="30" height="30">
             </a>
+			
+			<form th:action="@{/logout}" method="post" class="m-0">
+			    <button type="submit" class="btn p-0 border-0 bg-transparent" title="Cerrar sesión">
+			        <img src="https://img.icons8.com/?size=100&id=83179&format=png&color=000000"
+			             alt="Logout" width="30" height="30">
+			    </button>
+			</form>
         </nav>
+		
+		
         <h1 class="text-center my-5">Carrito de Compras</h1>
         <div class="mb-4">
             <a href="/products" class="btn btn-secondary">Continuar Comprando</a>

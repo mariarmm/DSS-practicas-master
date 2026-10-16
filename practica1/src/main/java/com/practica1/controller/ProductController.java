@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.practica1.model.Product;
 import com.practica1.service.ProductService;
@@ -23,10 +24,23 @@ public class ProductController {
 	//listar, añadir, editar y eliminar productos
 	
 	@RequestMapping(value = "/products")
-	public String list(Model model) {
-		model.addAttribute("products", productService.getAllProducts());
+//	public String list(Model model) {
+//		model.addAttribute("products", productService.getAllProducts());
+//		return "products";
+//	}
+	public String list(@RequestParam (required=false) String q,
+						@RequestParam (required=false) Double max,
+						@RequestParam (required=false) Double min,
+						Model model) {
+		model.addAttribute("products", productService.search(q, min, max));
+		model.addAttribute("q", q);
+		model.addAttribute("min", min);
+		model.addAttribute("max", max);
+		
 		return "products";
 	}
+	
+	
 
 	@RequestMapping(value = "/products/add")
 	public String add(Model model) {
