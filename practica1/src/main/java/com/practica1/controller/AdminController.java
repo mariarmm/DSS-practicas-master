@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.practica1.service.DatabaseExportService;
 import com.practica1.service.ProductService;
 
+//Controlador de administración
+
 @Controller
 public class AdminController {
 
+	//Servicios que usa el controlador, inyectados por el constructor
 	private final ProductService productService;
 	private final DatabaseExportService exportService;
 	
@@ -23,13 +26,14 @@ public class AdminController {
 		this.exportService = exportService;
 	}
 	
-	
+	//Gestiona la petición para mostrar el panel de administración
 	@RequestMapping("/admin")
 	public String admin(Model model) {
 		model.addAttribute("products", productService.getAllProducts());
 		return "admin";
 	}
 	
+	//Gestiona la petición para exportar la base de datos como un script SQL
 	@RequestMapping("/admin/export")
 	public ResponseEntity<byte[]> exportDatabase(){
 	

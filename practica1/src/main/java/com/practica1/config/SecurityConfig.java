@@ -9,6 +9,8 @@ import org.springframework.security.core.userdetails.*;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+//Configuración de seguridad
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {

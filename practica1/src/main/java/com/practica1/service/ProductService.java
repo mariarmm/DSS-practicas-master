@@ -3,46 +3,57 @@ package com.practica1.service;
 import java.util.List;
 
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Service;
 
 import com.practica1.repository.ProductRepo;
 import com.practica1.model.Product;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
+
+//Servicio de productos
+
 @Service
 public class ProductService {
 	
+	//Repositorio de acceso a datos
 	private final ProductRepo productRepo;
 
 	public ProductService (ProductRepo productRepo) {
 		this.productRepo = productRepo;
 	}
 	
-//	getAllProducts, getProductById, saveProduct y deleteProduct
-	
+
+	//Devuelve todos los productos del catálogo
 	public List<Product> getAllProducts(){
 		return productRepo.findAll();
 	}
 	
-//	public Optional<Product> getProductById(Long id) {
-//		return productRepo.findById(id);
-//	}
 	
+	//Busca un producto por su id.
 	public Product getProductById(Long id) {
 
 		return productRepo.findById(id)
-            .orElseThrow(() -> new IllegalArgumentException("Producto no encontrado: " + id));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Producto no encontrado: " + id));
     }
 	
+	
+	//Guarda un producto
 	public void saveProduct(Product product) {
 		productRepo.save(product);
 	}
 	
+	//Elimina el producto con ese id
 	public void deleteProduct(Long id) {
 		productRepo.deleteById(id);
 	}
 	
+	
+	//Busqueda y filtro por precio
+	// q es el texto que debe contener el nombre
+	// min corresponde al precio minimo
+	// max corresponde al precio máximo
+	// Los filtros son opcionales
 	public List<Product> search(String q, Double min, Double max){
 		
 		return productRepo.findAll().stream()
