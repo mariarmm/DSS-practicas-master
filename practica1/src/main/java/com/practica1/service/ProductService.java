@@ -39,8 +39,8 @@ public class ProductService {
 	
 	
 	//Guarda un producto
-	public void saveProduct(Product product) {
-		productRepo.save(product);
+	public Product saveProduct(Product product) {
+		return productRepo.save(product);
 	}
 	
 	//Elimina el producto con ese id

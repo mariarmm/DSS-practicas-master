@@ -1,5 +1,7 @@
 package com.practica1.config;
 
+import org.springframework.security.config.Customizer;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -32,6 +34,10 @@ public class SecurityConfig {
 				
 				.requestMatchers("/cart", "/cart/**").permitAll()
 				
+				.requestMatchers(HttpMethod.GET, "/api/products", "/api/products/**").permitAll()
+				
+				.requestMatchers("/api/**").hasRole("ADMIN")
+				
 				.anyRequest().authenticated()
 			)
 			.formLogin(form -> form
@@ -42,8 +48,9 @@ public class SecurityConfig {
 				.logoutUrl("/logout")
 				.logoutSuccessUrl("/").permitAll()
 			)
+			.httpBasic(Customizer.withDefaults())
 			.csrf(csrf -> csrf
-				.ignoringRequestMatchers("/h2-console/**")
+			    .ignoringRequestMatchers("/h2-console/**", "/api/**")
 			)
 			.headers(headers -> headers
 				.frameOptions(frame -> frame.sameOrigin())
